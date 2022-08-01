@@ -1,3 +1,4 @@
+using API.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -6,16 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddCors(x=> {
-    x.AddPolicy("CorsPolicy",policy=>{
-        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3001");
-    });
-});
-builder.Services.AddDbContext<DataContext>(opt => {
-    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
-
+// our configurations in Extensions -- AplicationServiceExtension 
+builder.Services.AddApplicationServices(builder.Configuration);
 
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
@@ -32,7 +25,8 @@ using (var scope = app.Services.CreateScope())
         logger.LogError(exc,"Error during migration");
     }
 }
- 
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -49,5 +43,6 @@ app.UseCors("CorsPolicy");
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 await app.RunAsync();

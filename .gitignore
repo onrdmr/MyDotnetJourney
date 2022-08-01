@@ -6,6 +6,7 @@
 .uuid
 appsettings.json
 reactivities.db
+reactivities.db-wal
 
 # User-specific files
 *.rsuser
