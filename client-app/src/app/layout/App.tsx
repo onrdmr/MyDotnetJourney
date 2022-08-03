@@ -1,15 +1,18 @@
-import { Activity } from '../models/activity'
 import React, { useEffect, useState } from 'react'
 import { Button, Container } from 'semantic-ui-react'
 import NavBar from './Navbar'
 import ActivityDashboard from '../activities/dashboard/ActivityDashboard'
-import agent from '../api/agent'
-import LoadPage from './LoadingComponent'
+import LoadPage from './LoadPage'
 import { store, useStore } from '../store/store'
 import { observer } from 'mobx-react-lite'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import ActivityForm from '../activities/form/ActivityForm'
+import HomePage from '../../features/Home/HomePage'
+import ActivityDetails from '../activities/details/ActivityDetails'
 // import useStore from '../store/store'
 
 function App() {
+  const location = useLocation()
   const { activityStore } = useStore()
 
   useEffect(() => {
@@ -27,10 +30,27 @@ function App() {
   console.log('rendering items')
   return (
     <>
-      <NavBar openForm={activityStore.handleFormOpen} />
-      <Container style={{ marginTop: '5em' }}>
-        <ActivityDashboard></ActivityDashboard>
-      </Container>
+      <Routes>
+        <Route
+          path='/activities'
+          element={<ActivityDashboard></ActivityDashboard>}
+        ></Route>
+        <Route path='/' element={<HomePage></HomePage>}></Route>
+
+        <Route
+          path='/activity/:id'
+          element={<ActivityDetails></ActivityDetails>}
+        ></Route>
+        <Route
+          path='/manage/:id'
+          element={<ActivityForm></ActivityForm>}
+        ></Route>
+        <Route
+          key={location.key}
+          path='/createActivity'
+          element={<ActivityForm></ActivityForm>}
+        ></Route>
+      </Routes>
     </>
   )
 }
