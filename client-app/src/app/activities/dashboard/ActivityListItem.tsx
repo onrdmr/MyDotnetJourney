@@ -11,7 +11,7 @@ import {
   Icon,
 } from 'semantic-ui-react'
 import { Activity } from '../../models/activity'
-import { useStore } from '../../store/store'
+import { useStore } from '../../stores/store'
 
 export default observer(function ActivityListItem(activity: Activity) {
   const [targetActivityId, setTargetActivityId] = useState(activity.id)

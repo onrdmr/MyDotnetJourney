@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { Menu, Container, Button } from 'semantic-ui-react'
-import { useStore } from '../store/store'
+import { useStore } from '../stores/store'
 
 // interface Props {
 //   openForm: () => void
@@ -22,6 +22,7 @@ export default function NavBar() {
           Reactivities
         </Menu.Item>
         <Menu.Item name='Activities' as={NavLink} to='/activities' />
+        <Menu.Item as={NavLink} to='/errors' name='errors' />
         <Menu.Item>
           <Button
             as={NavLink}

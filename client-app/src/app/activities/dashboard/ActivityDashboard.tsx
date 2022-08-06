@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Container, Grid, GridColumn } from 'semantic-ui-react'
-import { useStore } from '../../store/store'
+import { useStore } from '../../stores/store'
 import 'react-calendar/dist/Calendar.css'
 import ActivityDetails from '../details/ActivityDetails'
 import ActivityForm from '../form/ActivityForm'

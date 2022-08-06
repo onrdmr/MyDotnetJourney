@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import { Button, Container, Form, Segment } from 'semantic-ui-react'
 import Navbar from '../../layout/Navbar'
 import { Activity } from '../../models/activity'
-import { useStore } from '../../store/store'
+import { useStore } from '../../stores/store'
 
 export default observer(function ActivityForm() {
   const { activityStore } = useStore()

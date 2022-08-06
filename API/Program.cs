@@ -1,11 +1,16 @@
 using API.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using FluentValidation.AspNetCore;
+using Application.Activities;
+using API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddAuthorization();
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddFluentValidation(config=> {
+    config.RegisterValidatorsFromAssemblyContaining<Create>();
+});
 builder.Services.AddEndpointsApiExplorer();
 // our configurations in Extensions -- AplicationServiceExtension 
 builder.Services.AddApplicationServices(builder.Configuration);
@@ -27,11 +32,11 @@ using (var scope = app.Services.CreateScope())
 }
 
 
-
+app.UseMiddleware<ExceptionMiddleware>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage();
+    // app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 }

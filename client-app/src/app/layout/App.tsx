@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Container } from 'semantic-ui-react'
-import NavBar from './Navbar'
+import React, { useEffect } from 'react'
 import ActivityDashboard from '../activities/dashboard/ActivityDashboard'
 import LoadPage from './LoadPage'
-import { store, useStore } from '../store/store'
+import { useStore } from '../stores/store'
 import { observer } from 'mobx-react-lite'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import ActivityForm from '../activities/form/ActivityForm'
 import HomePage from '../../features/Home/HomePage'
 import ActivityDetails from '../activities/details/ActivityDetails'
+import TestErrors from '../../features/errors/Test.Error'
+import { ToastContainer } from 'react-toastify'
+import NotFound from '../../features/errors/NotFound'
+import ServerError from '../../features/errors/ServerError'
 // import useStore from '../store/store'
 
 function App() {
@@ -30,6 +32,7 @@ function App() {
   console.log('rendering items')
   return (
     <>
+      <ToastContainer position='bottom-right' hideProgressBar />
       <Routes>
         <Route
           path='/activities'
@@ -50,6 +53,9 @@ function App() {
           path='/createActivity'
           element={<ActivityForm></ActivityForm>}
         ></Route>
+        <Route path='/errors' element={<TestErrors />} />
+        <Route path='server-error' element={<ServerError />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </>
   )

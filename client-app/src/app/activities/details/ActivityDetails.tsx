@@ -12,7 +12,7 @@ import {
 } from 'semantic-ui-react'
 import LoadPage from '../../layout/LoadPage'
 import Navbar from '../../layout/Navbar'
-import { useStore } from '../../store/store'
+import { useStore } from '../../stores/store'
 import ActivityDetailedSidebar from './ActivityDetailedSidebar'
 import ActivityDetailedChat from './ActivityDetailedChat'
 import ActivityDetailedHeader from './ActivityDetailedHeader'
