@@ -14,7 +14,7 @@ namespace API.Extensions
     public static class ApplicationServiceExtensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config){
-            services.AddSwaggerGen();
+            // services.AddSwaggerGen();
 
             services.AddCors(x=> {
                 x.AddPolicy("CorsPolicy",policy=>{
